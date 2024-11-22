@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Eligibility System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tau-prolog/0.3.4/tau-prolog.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <h2>Navigation</h2>
+            <ul>
+                <li><a href="#single-check">Single Student Check</a></li>
+                <li><a href="#batch-upload">Batch Processing</a></li>
+                <li><a href="#reports">Reports</a></li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <!-- Single Student Check Section -->
+            <section id="single-check" class="card">
+                <h2>Single Student Eligibility Check</h2>
+                <div class="form-group">
+                    <label for="studentId">Student ID:</label>
+                    <input type="text" id="studentId" placeholder="Enter Student ID">
+                </div>
+                <div class="form-group">
+                    <label for="attendance">Attendance (%):</label>
+                    <input type="number" id="attendance" placeholder="Enter attendance percentage">
+                </div>
+                <div class="form-group">
+                    <label for="cgpa">CGPA:</label>
+                    <input type="number" id="cgpa" step="0.1" placeholder="Enter CGPA">
+                </div>
+                <button class="button primary" onclick="checkSingleStudent()">Check Eligibility</button>
+                <div id="single-result" class="result"></div>
+            </section>
+
+            <!-- Batch Upload Section -->
+            <section id="batch-upload" class="card">
+                <h2>Batch Processing</h2>
+                <div class="upload-area">
+                    <input type="file" id="csvFile" accept=".csv" class="file-input">
+                    <p class="drop-text">Drop CSV file here or click to upload</p>
+                </div>
+                <button class="button secondary" onclick="processBatch()">Process Batch</button>
+                <div id="batch-result" class="result">
+                    <div id="progress-bar" class="progress-bar"></div>
+                    <div id="batch-summary"></div>
+                </div>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="reports" class="card">
+                <h2>Reports</h2>
+                <div class="report-controls">
+                    <select id="report-type">
+                        <option value="scholarship">Scholarship Eligibility</option>
+                        <option value="exam">Exam Permission</option>
+                        <option value="both">Complete Report</option>
+                    </select>
+                    <button class="button tertiary" onclick="generateReport()">Generate Report</button>
+                </div>
+                <div id="report-result" class="result">
+                    <table id="report-table" class="hidden">
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Attendance</th>
+                                <th>CGPA</th>
+                                <th>Scholarship</th>
+                                <th>Exam Permission</th>
+                            </tr>
+                        </thead>
+                        <tbody id="report-body"></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="prolog-rules.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
